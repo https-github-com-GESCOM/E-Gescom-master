@@ -1,0 +1,67 @@
+﻿
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title</title>
+        <link rel="stylesheet" href=@Url.Content("~/Content/font-awesome.css")>
+
+
+        <link rel="stylesheet" href=@Url.Content("~/Content/bootstrap.min.css") />
+        <link rel="stylesheet" href=@Url.Content("~/Content/bootstrap-responsive.min.css") />
+
+        <link rel="stylesheet" href=@Url.Content("~/Content/theme.css") />
+        <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+    </head>
+    <body>
+
+
+
+
+        <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom">
+            <p class="h5 my-0 me-md-auto fw-normal">First ASP MVC</p>
+            <nav class="my-2 my-md-0 me-md-3">
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "p-2 text-dark" })
+                    @Html.ActionLink("Product", "Index", "Product", null, new { @class = "p-2 text-dark" })
+                }
+                @Html.ActionLink("About", "About", "Home", null, new { @class = "p-2 text-dark" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "p-2 text-dark" })
+
+            </nav>
+            @if (Request.IsAuthenticated)
+            {
+                var cookies = Request.Cookies[FormsAuthentication.FormsCookieName];
+                var ticketinfo = FormsAuthentication.Decrypt(cookies.Value);
+                var user = Newtonsoft.Json.JsonConvert.DeserializeObject<RegisterModel>(ticketinfo.UserData);
+
+                <a title="@user.Nom"
+                   class="btn btn-outline-primary" href="@Url.Action("Logout","Account")">
+                    Sign out
+                </a>
+
+            }
+            else
+            {
+                <a class="btn btn-outline-primary" href="@Url.Action("LOGIN","Account")">Sign in</a>
+            }
+
+
+        </header>
+        <main class="container">
+
+            @RenderBody()
+        </main>
+
+        <script src="@Url.Content(" ^/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+
+        <script src="@Url.Content(" ^/scripts/jquery-1.9.1.min.js ")" type="text/javascript"></script>
+        <script src="@Url.Content(" ^/scripts/jquery-ui-1.10.1.custom.min.js")" type="text/javascript"></script>
+
+    </body>
+</html>

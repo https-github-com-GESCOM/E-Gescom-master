@@ -1,0 +1,12 @@
+﻿
+@model Login.Models.HomeModel
+    @{ 
+        ViewBag.Title = "About";
+    }
+<div>
+    <h1>About page</h1>
+    Tagneguylain@gmai.com
+    <a href="@Url.Action("Index","Home")">Back to home</a>
+    <form action="@Url.Action("Index","Home")" method="post">
+    </form>
+</div>

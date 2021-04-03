@@ -1,0 +1,11 @@
+﻿
+
+@model Login.Models.HomeModel
+@{ 
+    ViewBag.Title = "Welcome";
+}
+
+<div>
+    <h1>home page</h1>
+    <h2>@(Model != null && !string.IsNullOrEmpty(Model.UserName)? "Welcome"+ Model.UserName : "")</h2>
+</div>
